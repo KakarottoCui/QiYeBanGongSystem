@@ -1,0 +1,30 @@
+package com.du.oa.service.impl;
+
+
+${model1};
+import com.du.oa.dao.${model1}Mapper;
+import com.du.oa.service.${model1}Service;
+import com.du.oa.utils.JqgridUtil;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ${model1}ServiceImpl extends ServiceImpl<${model1}Mapper, ${model1}> implements ${model1}Service {
+	@Autowired
+	private JqgridUtil jqgridUtil;
+	
+	@Override
+	public String getShowJson(int page, int count) {
+
+        List<${model1}> all = baseMapper.selectList(null);
+        int toIndex = count * page;
+        if (all.size() < toIndex) {
+            toIndex = all.size();
+        }
+        List<${model1}> list = all.subList(count * (page - 1), toIndex);
+        return jqgridUtil.getJson(list, page + "", all.size() , count);
+    
+	}
+
+}
